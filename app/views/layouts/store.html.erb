@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>Pragmatic Books Online</title>
+  <%= stylesheet_link_tag "new_depot", :media => "all" %>
+</head>
+<body id="store">
+  <div id="banner">
+    <%= image_tag("logo.png") %>
+    <%= @page_title || "Pragmatic Bookshelf" %>
+  </div>
+  <div id="columns">
+    <div id="side">
+      <div id="cart">
+        <%= render(:partial => "cart", :object => @cart) %>
+      </div>
+      <a href="http://www....">Home</a><br />
+      <a href="http://www..../faq">Questions</a><br />
+      <a href="http://www....">News</a><br />
+      <a href="http://www....">Contact</a><br />
+      <br/>
+      <a><%= Time.now %></a>
+    </div>
+    <div id="main">
+      <% if session[:counter] > 5 -%>
+      <div style="text-align:right"><%= flash[:counter] %></div>
+      <% end -%>
+      <% if flash[:notice] -%>
+      <div id="notice"><%= flash[:notice] %></div>
+      <% end -%>
+      
+      <%= yield :layout %>
+
+    </div>
+  </div>
+</body>
+</html>
