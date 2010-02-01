@@ -1,5 +1,16 @@
 /* Global styles */
 
+/* START:notice */
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+/* END:notice */
+
+
 h1 {
         font:  150% sans-serif;
         color: #226;
@@ -123,8 +134,8 @@ h1 {
 }
 
 #store .entry p {
- margin-top: 0.5em;
- margin-bottom: 0.8em;
+ margin-top: 0.5em; 
+ margin-bottom: 0.8em; 
 }
 
 #store .entry .price-line {
@@ -141,46 +152,43 @@ h1 {
   margin-right: 2em;
 }
 
+/* START:inline */
 #store .entry form, #store .entry form div {
-    display: inline;
+  display: inline;
 }
+/* END:inline */
 
-#notice {
-  border: 2px solid red;
-  padding: 1em;
-  margin-bottom: 2em;
-  background-color: #f0f0f0 ;
-  font: bold smaller sans-serif;
-}
-
-/* Styles for the cart on main page */
+/* START:cartmain */
+/* Styles for the cart in the main page */
 
 .cart-title {
-    font: 120% bold;
+  font: 120% bold;
 }
 
 .item-price, .total-line {
-    text-align: right;
+  text-align: right;
 }
 
-.total-line, .total-cell {
-    font-weight: bold;
-    border-top: 1px solid #595
+.total-line .total-cell {
+  font-weight: bold;
+  border-top: 1px solid #595;
 }
+/* END:cartmain */
 
-
-/* Styles for the cart in side bar */
+/* START:cartside */
+/* Styles for the cart in the sidebar */
 
 #cart, #cart table {
-    font-size:smaller;
-    color:white;
+  font-size: smaller;
+  color:     white;
 }
 
-#cart, table {
-    border-top:     1px dotted #595;
-    border-bottom:  1px dotted #595;
-    margin-bottom:  10px;
+#cart table {
+  border-top:    1px dotted #595;
+  border-bottom: 1px dotted #595;
+  margin-bottom: 10px;
 }
+/* END:cartside */
 
 /* The error box */
 
