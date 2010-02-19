@@ -1,14 +1,17 @@
 <div class="cart-title">Your Cart</div>
 <table>
-  <%= render(:partial => "cart_item", :collection => @cart.items) %>
+  <%= render(:partial => "cart_item", :collection => @cart.items) unless @cart.nil? %>
 
   <tr class="total-line">
     <td colspan="2">Total</td>
-    <td class="total-cell"><%= number_to_currency(@cart.total_price, :unit => "£") %></td>
+    <td class="total-cell"><%= number_to_currency(@cart.total_price, :unit => "£") unless @cart.nil? %></td>
   </tr>
 
 </table>
 
 <% form_remote_tag :url => {:action => 'empty_cart'} do %>
   <%= submit_tag 'Empty Cart' %>
+<% end %>
+<% if !@cart.nil? and action_name != 'checkout' %>
+<%= button_to "Checkout", {:action => 'checkout'}, {:id => 'checkout'} %>
 <% end %>

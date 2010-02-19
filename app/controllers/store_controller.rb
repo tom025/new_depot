@@ -33,6 +33,26 @@ class StoreController < ApplicationController
       end
   end
 
+  def checkout
+    @cart = find_cart
+    if @cart.items.empty? or @cart.nil?
+      redirect_to_index "Your Cart is Empty"
+    else
+      @order = Order.new
+    end
+  end
+
+  def save_order
+    @cart = find_cart
+    @order = Order.new(params[:order])
+    @order.add_line_items_from_cart(@cart)
+    if @order.save
+      session[:cart] = nil
+      redirect_to_index("Thank You for Your Oder")
+    else
+      render :action => 'checkout'
+    end
+  end
   
   private
 
