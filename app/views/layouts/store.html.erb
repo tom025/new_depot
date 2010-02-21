@@ -1,39 +1,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<head>
-  <title>Pragmatic Books Online</title>
-  <%= stylesheet_link_tag "new_depot", :media => "all" %>
-  <%= javascript_include_tag :defaults %>
-</head>
-<body id="store">
-  <div id="banner">
-    <%= image_tag("logo.png") %>
-    <%= @page_title || "Pragmatic Bookshelf" %>
-  </div>
-  <div id="columns">
-    <div id="side">
-      <% hidden_div_if(@cart.items.empty?, :id => "cart") do %>
-        <%= render(:partial => "cart", :object => @cart) %>
-      <% end %>
-      <a href="http://www....">Home</a><br />
-      <a href="http://www..../faq">Questions</a><br />
-      <a href="http://www....">News</a><br />
-      <a href="http://www....">Contact</a><br />
-      <br/>
-      <a><%= Time.now %></a>
+  <head>
+    <title>Pragmatic Books Online</title>
+    <%= stylesheet_link_tag "new_depot", :media => "all" %>
+    <%= javascript_include_tag :defaults %>
+  </head>
+  <body id="store">
+    <div id="banner">
+      <%= image_tag("logo.png") %>
+      <%= @page_title || "Pragmatic Bookshelf" %>
     </div>
-    <div id="main">
-      <% if session[:counter] > 5 -%>
-      <div style="text-align:right"><%= flash[:counter] %></div>
-      <% end -%>
-      <% if flash[:notice] -%>
-      <div id="notice"><%= flash[:notice] %></div>
-      <% end -%>
-      
-      <%= yield :layout %>
+    <div id="columns">
+      <% if @cart %>
+        <div id="side">
+          <% hidden_div_if(@cart.items.empty?, :id => "cart") do %>
+            <%= render(:partial => "cart", :object => @cart) %>
+          <% end %>
+        <% else %>
+          <div id="side">
+          <% end %>
 
-    </div>
-  </div>
-</body>
+          <a href="http://www....">Home</a><br />
+          <a href="http://www..../faq">Questions</a><br />
+          <a href="http://www....">News</a><br />
+          <a href="http://www....">Contact</a><br />
+
+          <% if session[:user_id] %>
+            <br />
+            <%= link_to 'Orders',   :controller => 'orders' %><br />
+            <%= link_to 'Products', :controller => 'products' %><br />
+            <%= link_to 'Users',    :controller => 'users' %><br />
+            <br />
+            <%= link_to 'Logout', :controller => 'admin', :action => 'logout' %>
+          <% end %>
+          <br />
+          <a><%= Time.now %></a>
+        </div>
+      </div>
+
+      <div id="main">
+        <% if session[:counter].to_i > 5 -%>
+          <div style="text-align:right"><%= flash[:counter] %></div>
+        <% end -%>
+        <% if flash[:notice] -%>
+          <div id="notice"><%= flash[:notice] %></div>
+        <% end -%>
+
+        <%= yield :layout %>
+
+      </div>
+
+  </body>
 </html>
